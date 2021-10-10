@@ -1,0 +1,217 @@
+/* .App {
+  text-align: center;
+} */
+
+.App-logo {
+  height: 40vmin;
+  pointer-events: none;
+}
+
+@media (prefers-reduced-motion: no-preference) {
+  .App-logo {
+    animation: App-logo-spin infinite 20s linear;
+  }
+}
+
+.App-header {
+  background-color: #282c34;
+  min-height: 100vh;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  font-size: calc(10px + 2vmin);
+  color: white;
+}
+
+.App-link {
+  color: #61dafb;
+}
+
+@keyframes App-logo-spin {
+  from {
+    transform: rotate(0deg);
+  }
+  to {
+    transform: rotate(360deg);
+  }
+}
+
+
+/* begin login */
+/* body,
+html {
+  margin: 0;
+  padding: 0;
+  height: 100%;
+  background: #60a3bc !important;
+} */
+.user_card {
+  height: 400px;
+  width: 350px;
+  margin-top: 120px;
+  margin-bottom: auto;
+  background: #f39c12;
+  position: relative;
+  display: flex;
+  justify-content: center;
+  flex-direction: column;
+  padding: 10px;
+  box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
+  -webkit-box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
+  -moz-box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
+  border-radius: 10px;
+
+}
+.user_cardDangKI {
+  height: 450px;
+  width: 350px;
+  margin-top: 120px;
+  margin-bottom: auto;
+  background: #f39c12;
+  position: relative;
+  display: flex;
+  justify-content: center;
+  flex-direction: column;
+  padding: 10px;
+  box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
+  -webkit-box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
+  -moz-box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
+  border-radius: 10px;
+
+}
+.brand_logo_container {
+  position: absolute;
+  height: 170px;
+  width: 170px;
+  top: -75px;
+  border-radius: 50%;
+  background: #60a3bc;
+  padding: 10px;
+  text-align: center;
+}
+.brand_logo {
+  height: 150px;
+  width: 150px;
+  border-radius: 50%;
+  border: 2px solid white;
+}
+.form_container {
+  margin-top: 100px;
+}
+.login_btn {
+  width: 100%;
+  background: #c0392b !important;
+  color: white !important;
+  margin-top: 29px;
+}
+.login_btn1 {
+  width: 100%;
+  background: #cf16b8 !important;
+  color: white !important;
+  margin-top: 29px;
+}
+.login_btn:focus {
+  box-shadow: none !important;
+  outline: 0px !important;
+}
+.login_container {
+  padding: 0 2rem;
+}
+.input-group-text {
+  background: #c0392b !important;
+  color: white !important;
+  border: 0 !important;
+  border-radius: 0.25rem 0 0 0.25rem !important;
+}
+.input_user,
+.input_pass:focus {
+  box-shadow: none !important;
+  outline: 0px !important;
+}
+.custom-checkbox .custom-control-input:checked~.custom-control-label::before {
+  background-color: #c0392b !important;
+}
+label.custom-control-label {
+  color: #2c3e50;
+}
+.erorrLogin{
+  color: #e91111;
+  font-size: 18px;
+  font-weight: 500;
+  padding-bottom: 10px;
+}
+.ChangeAccount{
+  font-size: 22px;
+  font-family: 'Dancing Script', cursive;
+  color: #2b41c0;
+  font-weight: bold;
+  cursor: pointer;
+}
+.ChangeAccount:hover{
+  color: #f6faf7;
+}
+
+.GiuaManHinh{
+  width: 100%;
+  height: 100%;
+  background: #60a3bc !important;
+  padding-bottom: 100px;
+}
+.anhoff{
+  width: 40px;
+  height: 30px;
+  position: absolute;
+  right: 0px;
+  top: 5px;
+  z-index: 100;
+}
+/* end login */
+
+/* begin app bieu do  */
+
+.to{
+  background-color: black;
+  width: 100%;
+  height: 100%;
+ }
+ #cachtrai{
+   width: 25px;
+   height: 25px;
+ }
+ .to1{
+   display: flex;
+ }
+ #cachphai{
+   width: 25px;
+   height: 25px;
+ }
+ .to2{
+   display: flex;
+ }
+ 
+ /* menu */
+ .navbar-expand-sm .navbar-collapse {
+   display: -ms-flexbox!important;
+   display: flex!important;
+   -ms-flex-preferred-size: auto;
+   flex-basis: auto;
+   justify-content: flex-end;
+ }
+ ul li {
+   margin-right: 30px;
+ }
+ .cachnhau{
+   margin-top: 30px;
+ }
+ .bg-danger {
+   background-color: #2a2a2a!important;
+ }
+ 
+ .navbar-dark .navbar-nav .nav-link:hover {
+   color: blue !important;
+   cursor: pointer;
+ }
+
+ 
+/* end ap bieu do   */
