@@ -66,8 +66,9 @@ function Login(props) {
         {
             if(UserName === data.User && PassWord === data.Pass)
             {
-                
                 localStorage.setItem("AccessToken", true);
+                localStorage.setItem("Username",UserName);
+                localStorage.setItem("key",data.key);
                 setUserName("");
                 setPassWord("");
                 history.replace("/Main");

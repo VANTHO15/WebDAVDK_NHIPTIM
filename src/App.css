@@ -209,9 +209,29 @@ label.custom-control-label {
  }
  
  .navbar-dark .navbar-nav .nav-link:hover {
-   color: blue !important;
+   color: rgb(255, 0, 234) !important;
    cursor: pointer;
  }
 
- 
+ canvas.canvasjs-chart-canvas {
+  height: 400px;
+}
+.homeicon {
+    font-size: 27px;
+}
+.btn.dropdown-toggle {
+  color: white;
+  font-size: 17px;
+}
+.dropdown-menu.dropdown-menu-right.show {
+  text-align: center;
+  background: rgb(245 245 245);
+  /* color: white; */
+}
+.homeiconsave{
+  font-size: 23px;
+}
+.iconclock{
+  font-size: 20px;
+}
 /* end ap bieu do   */
