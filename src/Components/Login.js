@@ -118,10 +118,10 @@ function Login(props) {
         return ;
     }
     return (
-        <div className="container-fluid GiuaManHinh">
-        <div className="row">
-          <div className="col"></div>
-          <div className="col">
+        <div className="GiuaManHinh">
+       
+          
+         
             <div className="user_card">
                 
                 {HienThiThongBao()}
@@ -156,9 +156,9 @@ function Login(props) {
                     </form>
                 </div>
             </div>
-            </div>
-            <div className="col"></div>
-        </div>
+           
+           
+       
        </div>
     );
 }

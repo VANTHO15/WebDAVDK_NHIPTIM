@@ -1,5 +1,7 @@
 import React, {useEffect , useState} from 'react';
 import { useHistory } from 'react-router';
+// npm install react-responsive --save
+import { useMediaQuery } from 'react-responsive'
 
 import CanvasJSReact from '../asset/canvasjs.react';
 // var CanvasJS = CanvasJSReact.CanvasJS;
@@ -33,7 +35,7 @@ var HienThi100ms="100 ms";
 var HienThiData ="Last 50 data"
 var SOLUONGDATA = 50;
 var THOIGIANUPDATE = 100;
-var Gio=0, Phut=0, Giay =0;
+// var Gio=0, Phut=0, Giay =0;
 var interval1,interval2,interval3,interval4,interval0,interval5;
 // var dataPointNhipTim = [];
 // var dataPointNhietDo = [];
@@ -64,10 +66,10 @@ function Main() {
         // console.log(Data);
         NhietDo = Number(Data.NhietDo);
         LedDo = Number(Data.LedDo);
-        var Mang = Data.ThoiGian.split(":");
-        Gio = Mang[0];
-        Phut = Mang[1];
-        Giay = Mang[2];
+        // var Mang = Data.ThoiGian.split(":");
+        // Gio = Mang[0];
+        // Phut = Mang[1];
+        // Giay = Mang[2];
         // console.log(Gio," ", Phut," ",Giay);
         // client.end();
       },[Data]);
@@ -364,97 +366,271 @@ function Main() {
       dps1=[];
     }
 // end hiên thị ms 
+// responsive  
+const isDesktopOrLaptop = useMediaQuery({query: '(min-width: 1224px)'})
+const isTabletOrMobile = useMediaQuery({ query: '(max-width: 1224px)' });
+function HienThiMenu()
+{
+  if(isDesktopOrLaptop)
+  { 
+    return(
+      <nav className="navbar navbar-expand-sm navbar-dark bg-danger">	
+            <div className="navbar-brand"> <i class="fa fa-user-circle">{"  " + localStorage.getItem("Username")}</i></div>
+            <button className="navbar-toggler d-lg-none" type="button" data-toggle="collapse" data-target="#collapsibleNavId" aria-controls="collapsibleNavId" aria-expanded="false" aria-label="Toggle navigation" />
+            <div className="collapse navbar-collapse" id="collapsibleNavId">
+                <ul className="navbar-nav mt-2 mt-lg-0  ">
+                    <li className="nav-item active">
+                        <div className="nav-link" > <i class="fa fa-clock-o iconclock"> {Data.ThoiGian}</i> </div>
+                    </li>
+                    <li className="nav-item active">
+                        <div className="btn-group">
+                          <div  className="btn dropdown-toggle" data-toggle="dropdown" >
+                            {HienThiData}
+                          </div>
+                          <div className="dropdown-menu dropdown-menu-right">
+                          <div onClick={handle10data}   className="dropdown-item" type="button">Last 10 data</div>
+                            <div onClick={handle25data}  className="dropdown-item" type="button">Last 25 data</div>
+                            <div onClick={handle50data}  className="dropdown-item" type="button">Last 50 data</div>
+                            <div onClick={handle75data}  className="dropdown-item" type="button">Last 75 data</div>
+                            <div onClick={handle100data}  className="dropdown-item" type="button">Last 100 data</div>
+                          </div>
+                        </div>
+                    </li>
+                  
+                    <li className="nav-item active">
+                        <div className="nav-link" ><i class="fa fa-save homeiconsave" ></i> </div>
+                    </li>
+                    <li className="nav-item active">
+                        <div className="btn-group">
+                          <div  className="btn dropdown-toggle" data-toggle="dropdown" >
+                            {HienThi100ms}
+                          </div>
+                          <div className="dropdown-menu dropdown-menu-right">
+                            <div onClick={handle10ms}   className="dropdown-item" type="button">10 ms</div>
+                            <div onClick={handle50ms}   className="dropdown-item" type="button">50 ms</div>
+                            <div onClick={handle100ms}   className="dropdown-item" type="button">100 ms</div>
+                            <div onClick={handle200ms}  className="dropdown-item" type="button">200 ms</div>
+                            <div onClick={handle500ms}  className="dropdown-item" type="button">500 ms</div>
+                            <div onClick={handle1000ms}  className="dropdown-item" type="button">1000 ms</div>
+                          </div>
+                        </div>
+                    </li>
+                    <li className="nav-item active">
+                        <div className="nav-link" ><i class="fa fa-home homeicon" ></i> </div>
+                    </li>
+                    <li className="nav-item active">
+                        <div data-toggle="modal"  data-target="#myModal" className="nav-link" > <i class="fa fa-sign-out homeicon"></i> </div>
+                    </li> 
+                </ul>
+            </div>
+        </nav>
+    )
+  }
+  else if(isTabletOrMobile)
+  {
+    return(
+      <nav className="navbar navbar-expand-sm navbar-dark bg-danger">	
+            <div className="navbar-brand"> <i class="fa fa-user-circle">{"  " + localStorage.getItem("Username")}</i></div>
+            <button className="navbar-toggler d-lg-none" type="button" data-toggle="collapse" data-target="#collapsibleNavId" aria-controls="collapsibleNavId" aria-expanded="false" aria-label="Toggle navigation" />
+            <div className="collapse navbar-collapse" id="collapsibleNavId">
+                <ul className="navbar-nav mt-2 mt-lg-0  ">
+                      <li className="nav-item active">
+                          <div data-toggle="modal"  data-target="#myModal" className="nav-link" > <i class="fa fa-sign-out homeicon"></i> </div>
+                      </li> 
+                </ul>
+            </div>
+        </nav>
+    ) 
+  }
+}
+
+function HienThiContent()
+{
+  if(isDesktopOrLaptop)
+  { 
+    return(
+      <div className="container-flux to">
+
+            <div className="row">
+            <div id="cachphai"></div>
+           </div>
+
+          <div className="row ">
+            <div className="col-8 to1">
+            <div id="cachtrai"></div>
+            {/* <h4>{dateTime.toLocaleTimeString()}</h4> */}
+            <CanvasJSChart className="so1" options = {optionsNhipTim}/>
+            </div>
+            <div className="col-4 to1">
+            <CanvasJSChart className="so2" options = {optionsTronNhipTim}/>
+            <div id="cachphai"></div>
+            </div>
+          </div>
+
+          <div className="row">
+            <div id="cachphai"></div>
+          </div>
+
+
+
+          <div className="row">
+            <div className="col-8 to1">
+            <div id="cachtrai"></div>
+            {/* <h4>{dateTime.toLocaleTimeString()}</h4> */}
+            <CanvasJSChart className="so1" options = {optionsNhietDo}/>
+            </div>
+            <div className="col-4 to1">
+            <CanvasJSChart className="so2" options = {optionsTronOxy}/>
+            <div id="cachphai"></div>
+            </div>
+          </div>
+
+          <div className="row">
+            <div id="cachphai"></div>
+          </div>
+
+        </div>
+     
+    )
+  }
+  else if(isTabletOrMobile)
+  {
+    return(
+      <div className="container-flux to">
+
+
+            <div className="row">
+               <div id="cachphai"></div>
+            </div>
+             {/* phân menu của điện thoai  */}
+            <div className="row phan-menu-dienthoai">
+          
+                  <div className="col-5 text-center">
+                      <div className="btn-group">
+                            <div  className="btn dropdown-toggle" data-toggle="dropdown" >
+                              {HienThiData}
+                            </div>
+                            <div className="dropdown-menu dropdown-menu-right">
+                              <div onClick={handle10data}   className="dropdown-item" type="button">Last 10 data</div>
+                              <div onClick={handle25data}  className="dropdown-item" type="button">Last 25 data</div>
+                              <div onClick={handle50data}  className="dropdown-item" type="button">Last 50 data</div>
+                              <div onClick={handle75data}  className="dropdown-item" type="button">Last 75 data</div>
+                              <div onClick={handle100data}  className="dropdown-item" type="button">Last 100 data</div>
+                            </div>
+                        </div>
+                  </div>
+                  <div className="col-3 text-center">
+                        <i class="fa fa-clock-o iconclock"> {Data.ThoiGian}</i>
+                  </div>
+                  <div className="col-4 text-center">
+                        <div className="btn-group">
+                          <div  className="btn dropdown-toggle" data-toggle="dropdown" >
+                            {HienThi100ms}
+                          </div>
+                          <div className="dropdown-menu dropdown-menu-right">
+                            <div onClick={handle10ms}   className="dropdown-item" type="button">10 ms</div>
+                            <div onClick={handle50ms}   className="dropdown-item" type="button">50 ms</div>
+                            <div onClick={handle100ms}   className="dropdown-item" type="button">100 ms</div>
+                            <div onClick={handle200ms}  className="dropdown-item" type="button">200 ms</div>
+                            <div onClick={handle500ms}  className="dropdown-item" type="button">500 ms</div>
+                            <div onClick={handle1000ms}  className="dropdown-item" type="button">1000 ms</div>
+                          </div>
+                        </div>
+                  </div>
+                 
+            </div>
+
+            {/* het phan menu dien thoai  */}
+
+            <div className="row">
+               <div id="cachphai"></div>
+            </div>
+
+          <div className="row ">
+            <div className="col to1">
+            <div id="cachtrai"></div>
+            <CanvasJSChart className="so1" options = {optionsNhipTim}/>
+            </div>
+            <div id="cachphai"></div>
+          </div>
+
+          <div className="row">
+               <div id="cachphai"></div>
+          </div>
+
+          <div className="row ">
+            <div className="col to1">
+            <div id="cachtrai"></div>
+            <CanvasJSChart className="so2" options = {optionsTronNhipTim}/>
+            </div>
+            <div id="cachphai"></div>
+          </div>
+
+          <div className="row">
+            <div id="cachphai"></div>
+          </div>
+
+          {/* het 2 cái   */}
+         
+          <div className="row ">
+            <div className="col to1">
+            <div id="cachtrai"></div>
+            <CanvasJSChart className="so1" options = {optionsNhietDo}/>
+            </div>
+            <div id="cachphai"></div>
+          </div>
+
+          <div className="row">
+               <div id="cachphai"></div>
+          </div>
+
+          <div className="row ">
+            <div className="col to1">
+            <div id="cachtrai"></div>
+            <CanvasJSChart className="so2" options = {optionsTronOxy}/>
+            </div>
+            <div id="cachphai"></div>
+          </div>
+
+          <div className="row">
+            <div id="cachphai"></div>
+          </div>
+          {/* het 2 cái */}
+
+        </div>
+    ) 
+  }
+}
+// end responsive  
+
+//  MAIN 
     return (
         <div>
-        <nav className="navbar navbar-expand-sm navbar-dark bg-danger">	
-           <div className="navbar-brand"> <i class="fa fa-user-circle">{"  " + localStorage.getItem("Username")}</i></div>
-           <button className="navbar-toggler d-lg-none" type="button" data-toggle="collapse" data-target="#collapsibleNavId" aria-controls="collapsibleNavId" aria-expanded="false" aria-label="Toggle navigation" />
-           <div className="collapse navbar-collapse" id="collapsibleNavId">
-               <ul className="navbar-nav mt-2 mt-lg-0  ">
-               <li className="nav-item active">
-                   <div className="nav-link" > <i class="fa fa-clock-o iconclock"> {Data.ThoiGian}</i> </div>
-               </li>
-               <li className="nav-item active">
-                  <div className="btn-group">
-                    <div  className="btn dropdown-toggle" data-toggle="dropdown" >
-                      {HienThiData}
-                    </div>
-                    <div className="dropdown-menu dropdown-menu-right">
-                     <div onClick={handle10data}   className="dropdown-item" type="button">Last 10 data</div>
-                      <div onClick={handle25data}  className="dropdown-item" type="button">Last 25 data</div>
-                      <div onClick={handle50data}  className="dropdown-item" type="button">Last 50 data</div>
-                      <div onClick={handle75data}  className="dropdown-item" type="button">Last 75 data</div>
-                      <div onClick={handle100data}  className="dropdown-item" type="button">Last 100 data</div>
-                    </div>
-                  </div>
-               </li>
-               <li className="nav-item active">
-                   <div className="nav-link" ><i class="fa fa-save homeiconsave" ></i> </div>
-               </li>
-               <li className="nav-item active">
-                  <div className="btn-group">
-                    <div  className="btn dropdown-toggle" data-toggle="dropdown" >
-                      {HienThi100ms}
-                    </div>
-                    <div className="dropdown-menu dropdown-menu-right">
-                       <div onClick={handle10ms}   className="dropdown-item" type="button">10 ms</div>
-                       <div onClick={handle50ms}   className="dropdown-item" type="button">50 ms</div>
-                       <div onClick={handle100ms}   className="dropdown-item" type="button">100 ms</div>
-                       <div onClick={handle200ms}  className="dropdown-item" type="button">200 ms</div>
-                       <div onClick={handle500ms}  className="dropdown-item" type="button">500 ms</div>
-                       <div onClick={handle1000ms}  className="dropdown-item" type="button">1000 ms</div>
+                {/* The Modal */}
+                <div className="modal" id="myModal">
+                  <div className="modal-dialog">
+                    <div className="modal-content">
+                      {/* Modal Header */}
+                      <div className="modal-header">
+                        <h4 className="modal-title">🚫❌🔕</h4>
+                        <button type="button" className="close" data-dismiss="modal">×</button>
+                      </div>
+                      {/* Modal body */}
+                      <div className="modal-body">
+                       Are you sure you want to sign out !😭☹️
+                      </div>
+                      {/* Modal footer */}
+                      <div className="modal-footer">
+                        <button onClick={handleLogour} type="button" data-dismiss="modal" className="btn btn-danger">OK 😥😥</button>
+                        <button type="button" className="btn btn-primary" data-dismiss="modal">Close 🥰</button>
+                      </div>
                     </div>
                   </div>
-               </li>
-               <li className="nav-item active">
-                   <div className="nav-link" ><i class="fa fa-home homeicon" ></i> </div>
-               </li>
-               <li className="nav-item active">
-                   <div onClick={handleLogour} className="nav-link" > <i class="fa fa-sign-out homeicon"></i> </div>
-               </li> 
-               </ul>
-           </div>
-       </nav>
-   {/* ///////////////////// */}
-       <div className="container-flux to">
-
-      <div className="row">
-       <div id="cachphai"></div>
-     </div>
-
-     <div className="row ">
-       <div className="col-8 to1">
-       <div id="cachtrai"></div>
-       {/* <h4>{dateTime.toLocaleTimeString()}</h4> */}
-       <CanvasJSChart className="so1" options = {optionsNhipTim}/>
-       </div>
-       <div className="col-4 to1">
-       <CanvasJSChart className="so2" options = {optionsTronNhipTim}/>
-       <div id="cachphai"></div>
-       </div>
-     </div>
-
-     <div className="row">
-       <div id="cachphai"></div>
-     </div>
-
-     <div className="row">
-       <div className="col-8 to1">
-       <div id="cachtrai"></div>
-       {/* <h4>{dateTime.toLocaleTimeString()}</h4> */}
-       <CanvasJSChart className="so1" options = {optionsNhietDo}/>
-       </div>
-       <div className="col-4 to1">
-       <CanvasJSChart className="so2" options = {optionsTronOxy}/>
-       <div id="cachphai"></div>
-       </div>
-     </div>
-
-     <div className="row">
-       <div id="cachphai"></div>
-     </div>
-
-   </div>
+                </div>
+  {/* begin menu   */}
+        { HienThiMenu()}
+  {/* ///////////////////// */}
+       {HienThiContent()}
    </div>
     );
 }
