@@ -1,10 +1,10 @@
-import React, {useEffect , useState} from 'react';
+import React, {useEffect , useRef, useState} from 'react';
 import { useHistory } from 'react-router';
 // npm install react-responsive --save
 import { useMediaQuery } from 'react-responsive'
 
 import CanvasJSReact from '../asset/canvasjs.react';
-// var CanvasJS = CanvasJSReact.CanvasJS;
+var CanvasJS = CanvasJSReact.CanvasJS;
 var CanvasJSChart = CanvasJSReact.CanvasJSChart;
 
 var mqtt = require('mqtt')
@@ -14,7 +14,7 @@ var options = {
   username: "Vantho15",
   password: "3759DFCEFE834F17",
   useSSL: true,
-  clientId: 'Tho2k'
+  clientId: Math.random() + ""
 }
 const client = mqtt.connect("wss://ngoinhaiot.com", options);
 
@@ -37,18 +37,31 @@ var SOLUONGDATA = 50;
 var THOIGIANUPDATE = 100;
 // var Gio=0, Phut=0, Giay =0;
 var interval1,interval2,interval3,interval4,interval0,interval5;
-// var dataPointNhipTim = [];
-// var dataPointNhietDo = [];
 // end bieu do  
-function Main() {
+function Main(){
 // begin mqtt
     let history = useHistory();
-    const [Data, setData] = useState({Change: "0",NhipTim: "0",LedDo:"0",NhietDo:"0",ThoiGian:"0",Spo2: "0"});
+    // var chart1 = useRef();
+    // var chart2 = useRef();
+    // var chart3 = useRef();
+    // var chart4 = useRef();
+    const [Data, setData] = useState({Change: "0",NhipTim: "0",LedDo:"0",NhietDo:"0",ThoiGian:"00:00:00",Spo2: "0"});
     function handleLogour()
     {
       localStorage.removeItem("AccessToken");
       localStorage.removeItem("Username");
+      client.unsubscribe("Vantho15/"+ localStorage.getItem("key"),()=>{console.log("Unsubcribe thành công")});
       localStorage.removeItem("key");
+      xVal = 0;
+      dps = [{x: 1, y: 10}, {x:2, y: 13}, {x: 3, y: 18}, {x: 4, y: 20}, {x: 5, y: 17},{x: 6, y: 10}, 
+        {x: 7, y: 13}, {x: 8, y: 18}, {x: 9, y: 20}, {x: 10, y: 17}, {x: 11, y: 18}, {x: 12, y: 20},
+         {x: 13, y: 17}, {x: 14, y: 18}, {x: 15, y: 20}, {x: 16, y: 17}, {x: 17, y: 18}, {x: 18, y: 20}, 
+         {x: 19, y: 17}, {x: 20, y: 18}];
+      xVal1 = 0;
+      dps1 = [{x: 1, y: 10}, {x:2, y: 13}, {x: 3, y: 18}, {x: 4, y: 20}, {x: 5, y: 17},{x: 6, y: 10}, 
+        {x: 7, y: 13}, {x: 8, y: 18}, {x: 9, y: 20}, {x: 10, y: 17}, {x: 11, y: 18}, {x: 12, y: 20},
+         {x: 13, y: 17}, {x: 14, y: 18}, {x: 15, y: 20}, {x: 16, y: 17}, {x: 17, y: 18}, {x: 18, y: 20}, 
+         {x: 19, y: 17}, {x: 20, y: 18}];
       history.replace("/");
     }
      useEffect(()=>{
@@ -59,21 +72,23 @@ function Main() {
       client.subscribe("Vantho15/"+ localStorage.getItem("key") ,()=>{console.log("thành công")});
      },[]);
 
-     useEffect(()=>{
-      client.once('message', function (topic, message) {
+       useEffect(()=>
+       {
+        client.once('message', function (topic, message) {
         let data = JSON.parse(message.toString());
         setData(data);
-        // console.log(Data);
+        // console.log(data);
         NhietDo = Number(Data.NhietDo);
         LedDo = Number(Data.LedDo);
+        
         // var Mang = Data.ThoiGian.split(":");
         // Gio = Mang[0];
         // Phut = Mang[1];
         // Giay = Mang[2];
         // console.log(Gio," ", Phut," ",Giay);
         // client.end();
-      },[Data]);
-     });
+        });
+      });
 //  end mqtt  
 // begin bieu do  
   useEffect(()=>{    // Cứ updateInterval ms chạy 1 lần
@@ -81,6 +96,15 @@ function Main() {
       // console.log("Click 100ms");
       upDateChart();
       upDateChart1();
+      // var x1 = chart1.current;
+      // var x2 = chart2.current;
+      // var x3 = chart3.current;
+      // var x4 = chart4.current;
+      // x1.render();
+      // x2.render();
+      // x3.render();
+      // x4.render();
+      // console.log(2);
     },THOIGIANUPDATE);
   },[]);
   function upDateChart()
@@ -258,6 +282,14 @@ function Main() {
         // console.log("Click 10ms");
         upDateChart();
         upDateChart1();
+        // var x1 = chart1.current;
+        // var x2 = chart2.current;
+        // var x3 = chart3.current;
+        // var x4 = chart4.current;
+        // x1.render();
+        // x2.render();
+        // x3.render();
+        // x4.render();
       },THOIGIANUPDATE);
     }
     function handle100ms()
@@ -273,6 +305,14 @@ function Main() {
         // console.log("Click 100ms");
         upDateChart();
         upDateChart1();
+        // var x1 = chart1.current;
+        // var x2 = chart2.current;
+        // var x3 = chart3.current;
+        // var x4 = chart4.current;
+        // x1.render();
+        // x2.render();
+        // x3.render();
+        // x4.render();
       },THOIGIANUPDATE);
     }
     function handle200ms()
@@ -288,6 +328,14 @@ function Main() {
         // console.log("Click 200ms");
         upDateChart();
         upDateChart1();
+        // var x1 = chart1.current;
+        // var x2 = chart2.current;
+        // var x3 = chart3.current;
+        // var x4 = chart4.current;
+        // x1.render();
+        // x2.render();
+        // x3.render();
+        // x4.render();
       },THOIGIANUPDATE);
     }
     function handle500ms()
@@ -303,6 +351,14 @@ function Main() {
         // console.log("Click 500ms");
         upDateChart();
         upDateChart1();
+        // var x1 = chart1.current;
+        // var x2 = chart2.current;
+        // var x3 = chart3.current;
+        // var x4 = chart4.current;
+        // x1.render();
+        // x2.render();
+        // x3.render();
+        // x4.render();
       },THOIGIANUPDATE);
     }
     function handle1000ms()
@@ -318,6 +374,14 @@ function Main() {
         // console.log("Click 1000ms");
         upDateChart();
         upDateChart1();
+        // var x1 = chart1.current;
+        // var x2 = chart2.current;
+        // var x3 = chart3.current;
+        // var x4 = chart4.current;
+        // x1.render();
+        // x2.render();
+        // x3.render();
+        // x4.render();
       },THOIGIANUPDATE);
     }
     function handle10data()
@@ -458,11 +522,11 @@ function HienThiContent()
           <div className="row ">
             <div className="col-8 to1">
             <div id="cachtrai"></div>
-            {/* <h4>{dateTime.toLocaleTimeString()}</h4> */}
-            <CanvasJSChart className="so1" options = {optionsNhipTim}/>
+            {/* <h4>{dateTime.toLocaleTimeString()}</h4>        onRef={ref => (chart1.current = ref)}*/ }
+            <CanvasJSChart className="so1" options = {optionsNhipTim} />
             </div>
             <div className="col-4 to1">
-            <CanvasJSChart className="so2" options = {optionsTronNhipTim}/>
+            <CanvasJSChart className="so2" options = {optionsTronNhipTim} />
             <div id="cachphai"></div>
             </div>
           </div>
@@ -477,10 +541,10 @@ function HienThiContent()
             <div className="col-8 to1">
             <div id="cachtrai"></div>
             {/* <h4>{dateTime.toLocaleTimeString()}</h4> */}
-            <CanvasJSChart className="so1" options = {optionsNhietDo}/>
+            <CanvasJSChart className="so1" options = {optionsNhietDo} />
             </div>
             <div className="col-4 to1">
-            <CanvasJSChart className="so2" options = {optionsTronOxy}/>
+            <CanvasJSChart className="so2" options = {optionsTronOxy} />
             <div id="cachphai"></div>
             </div>
           </div>
@@ -549,7 +613,7 @@ function HienThiContent()
           <div className="row ">
             <div className="col to1">
             <div id="cachtrai"></div>
-            <CanvasJSChart className="so1" options = {optionsNhipTim}/>
+            <CanvasJSChart className="so1" options = {optionsNhipTim} />
             </div>
             <div id="cachphai"></div>
           </div>
@@ -561,7 +625,7 @@ function HienThiContent()
           <div className="row ">
             <div className="col to1">
             <div id="cachtrai"></div>
-            <CanvasJSChart className="so2" options = {optionsTronNhipTim}/>
+            <CanvasJSChart className="so2" options = {optionsTronNhipTim} />
             </div>
             <div id="cachphai"></div>
           </div>
@@ -575,7 +639,7 @@ function HienThiContent()
           <div className="row ">
             <div className="col to1">
             <div id="cachtrai"></div>
-            <CanvasJSChart className="so1" options = {optionsNhietDo}/>
+            <CanvasJSChart className="so1" options = {optionsNhietDo} />
             </div>
             <div id="cachphai"></div>
           </div>
@@ -587,7 +651,7 @@ function HienThiContent()
           <div className="row ">
             <div className="col to1">
             <div id="cachtrai"></div>
-            <CanvasJSChart className="so2" options = {optionsTronOxy}/>
+            <CanvasJSChart className="so2" options = {optionsTronOxy} />
             </div>
             <div id="cachphai"></div>
           </div>

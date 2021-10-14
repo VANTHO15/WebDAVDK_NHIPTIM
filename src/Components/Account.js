@@ -27,7 +27,7 @@ function Account(props) {
                       Pass:Pass
                      })
                     })
-                  console.log(arrayData);
+                //   console.log(arrayData);
                   setDataFirebase(arrayData);
                 });
             } catch(error){
@@ -58,9 +58,9 @@ function Account(props) {
     }
     function handleDangKi()
     {
-        console.log(UserName);
-        console.log(PassWord);
-        console.log(MacID);
+        // console.log(UserName);
+        // console.log(PassWord);
+        // console.log(MacID);
 
         DataFirebase.forEach((data)=>
         {

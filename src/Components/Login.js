@@ -10,7 +10,7 @@ function Login(props) {
     let history = useHistory();
     function ChangeAccount()
     {
-        console.log("Click 123");
+        // console.log("Click 123");
         history.replace("/Change");
     }
     useEffect(()=>{
@@ -34,7 +34,7 @@ function Login(props) {
                       Pass:Pass
                      })
                     })
-                  console.log(arrayData);
+                //   console.log(arrayData);
                   setDataFirebase(arrayData);
                 });
             } catch(error){
@@ -59,9 +59,9 @@ function Login(props) {
     }
     function handleLogin()
     {
-        console.log("Click");
-        console.log(UserName);
-        console.log(PassWord);
+        // console.log("Click");
+        // console.log(UserName);
+        // console.log(PassWord);
         DataFirebase.forEach((data)=>
         {
             if(UserName === data.User && PassWord === data.Pass)
@@ -75,7 +75,7 @@ function Login(props) {
             }
         })
             setisHienThi(true);
-            console.log("Nhập Sai Tài Khoản Hoặc Mật Khẩu");
+            // console.log("Nhập Sai Tài Khoản Hoặc Mật Khẩu");
             setUserName("");
             setPassWord("");
     }
