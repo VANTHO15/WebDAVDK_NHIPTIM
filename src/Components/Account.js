@@ -73,7 +73,7 @@ function Account(props) {
                         PASS: PassWord
                 })
                 .then(()=>{
-                    alert("Thành Công");
+                    // alert("Thành Công");
                 })
                 .catch((er)=>{
                     setisHienThi(true);
